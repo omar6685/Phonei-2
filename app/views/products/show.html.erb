@@ -8,5 +8,7 @@
   <%= number_to_currency(@product.price/100) %>
 </p>
 
+<td><%= button_to "Buy now!", checkout_create_path, params: {id: product.id}, remote: true, data: { disable_with: "validating..."} %></td>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

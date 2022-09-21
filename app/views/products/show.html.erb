@@ -5,7 +5,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= number_to_currency(@product.price/100) %>
+  <%= @product.price %>
 </p>
 
 <td><%= button_to "Buy now!", checkout_create_path, params: {id: product.id}, remote: true, data: { disable_with: "validating..."} %></td>

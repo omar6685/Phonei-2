@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Phonei</title>
+    <title>Shoplify</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +11,8 @@
 
   <body>
     <center>
-      <h1>Phonei Store</h1>
+      <h1>Stripe eCommerce app demo</h1>
+      <%= link_to "Source code", "https://github.com/corsego/shoplify", target: "_blank" %>
     </center>
     <hr>
     <p class="notice" style="background-color: green;"><%= notice %></p>
@@ -24,7 +25,17 @@
       <br>
       <%= current_user.stripe_customer_id %>
       <br>
-      <%= link_to "Log out", destroy_user_session_path, method: :get %>
+      <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+      <hr>
+      <h1>Shopping cart</h1>
+      <% @cart.each do |product| %>
+        <%= product.name %>
+        <br>
+      <% end %>
+      <% if @cart.present? %>
+        <%= @cart.collect { |item| item.to_builder.attributes! } %>
+        <%= button_to "Buy now!", checkout_create_path, remote: true, data: { disable_with: "validating..."} %>
+      <% end %>
       <hr>
     <% end %>
     <%= yield %>
